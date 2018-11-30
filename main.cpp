@@ -50,16 +50,34 @@ int addGame(int counter, ChooseGenre* gPTR)
 				gPTR -> setAction(action);
 			break;
 			case 2:
+				cout<<"Enter the Adventure Game: ";
+				cin>>adventure;
+				gPTR -> setAdventure(adventure);
 			break;
 			case 3:
+				cout<<"Enter the Role-Playing Game: ";
+				cin>>rp;
+				gPTR -> setRP(rp);
 			break;
 			case 4:
+				cout<<"Enter the FPS Game: ";
+				cin>>fps;
+				gPTR -> setFPS(fps);
 			break;
 			case 5:
+				cout<<"Enter the Simulation Game: ";
+				cin>>sims;
+				gPTR -> setSim(sims);
 			break;
 			case 6:
+				cout<<"Enter the Strategy Game: ";
+				cin>>strats;
+				gPTR -> setStrat(strats);
 			break;
 			case 7:
+				cout<<"Enter the Sport Game: ";
+				cin>>sport;
+				gPTR -> setSport(sport);
 			break;
 			case 8: cout<<"EXITING"<<endl;
 			break;
@@ -70,6 +88,8 @@ int addGame(int counter, ChooseGenre* gPTR)
 	gPTR++;
 	return counter;
 }
+
+//int viewAllGames
 
 int main(int argc, char** argv) 
 {
