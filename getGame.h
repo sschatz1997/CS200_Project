@@ -38,6 +38,7 @@ class ChooseGenre : public GetGame {
 		string getSim() const {return sims; }
 		string getStrat() const {return strats; }
 		string getSport() const {return sports; }
+		string print() const;
 		
 };
 

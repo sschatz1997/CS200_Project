@@ -89,7 +89,15 @@ int addGame(int counter, ChooseGenre* gPTR)
 	return counter;
 }
 
-//int viewAllGames
+void viewAllGames(int index, ChooseGenre* gPTR)
+{
+	cout<<"test: "<< gPTR -> getAction()<<endl;
+	for(int i = 0; i<index; i++)
+	{
+		cout << gPTR -> print();
+		gPTR++;
+	}
+}
 
 int main(int argc, char** argv) 
 {
@@ -107,7 +115,7 @@ int main(int argc, char** argv)
 		switch(userChoice){
 			case 1: index = addGame(index, G);
 			break;
-			case 2:
+			case 2:viewAllGames(index, G);
 			break;
 			case 3:
 			break;
