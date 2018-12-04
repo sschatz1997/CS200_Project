@@ -1,7 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "getGame.h"
+#include "Media.h""
+#include "Game.h"
+#include "Movie.h"
+#include "gameGenre.h"
+#include "movieGenre.h"
 using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
