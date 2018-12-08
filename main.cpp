@@ -50,7 +50,7 @@ int gGenreMenu(){
 	return choice;
 }
 
-int addGame(int index, Media* gPTR[]){
+int addGame(int index, Media** gPTR){
 	cin.clear();
 	fflush(stdin);
 	system("CLS");
@@ -113,14 +113,14 @@ int addGame(int index, Media* gPTR[]){
 	g.setGenre(genre);
 	
 	gPTR[index] = &g;
-	system("pause");
+	cout << gPTR[index] -> toString();
 	index++;
 	return index;
 }
 
-void viewAllGames(int index, Media* gPTR[]){
+void viewAllGames(int index, Media** gPTR){
 	for(int i = 0; i < index; i++){
-		cout << gPTR[i] -> toString() << "\n";
+		cout << gPTR[i]->toString() << "\n";
 	}
 }
 
@@ -133,8 +133,6 @@ int main() {
 	int mIndex = 0;
 	int gIndex = 0;
 	
-	//mediaList[0]->setName(test); 
-	//cout<<"Action game "<<mediaList[0]->getName();
 	do{
 		cout<< "Media Type:\n"
 			<< "1. Game\n"
@@ -175,6 +173,7 @@ int main() {
 						break;
 				}
 			}*/
+			system("PAUSE");
 		}while(userChoice != 4);
 	}while(userChoice != 4);
 	system("PAUSE");
