@@ -10,16 +10,16 @@ class Media{
 	public:
 		Media();
 		void setName(string);
-		void setCost(float);
+		void setCost(string);
 		
 		string getName() const;
-		float getCost() const;
+		string getCost() const;
 		
 		virtual string print() const = 0;
 	
 	protected:
 		string name;
-		float unitCost;
+		string unitCost;
 };
 
 #endif

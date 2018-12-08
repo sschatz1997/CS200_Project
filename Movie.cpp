@@ -1,3 +1,6 @@
+#include <iomanip>
+#include <sstream>
+
 #include "Movie.h"
 
 using namespace std;
@@ -26,4 +29,13 @@ string Movie::getRating() const{
 }
 string Movie::getGenre() const{
 	return genre;
+}
+
+string Movie::toString() const{
+	return "Title: " + name + "\n" +
+			"Cost: " + unitCost + "\n" +
+			"Rating: " + movieRating + "\n" +
+			"Genre: " + genre + "\n" +
+			"Length: " + runLength;
+
 }

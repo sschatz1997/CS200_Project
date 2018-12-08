@@ -18,6 +18,8 @@ class Game : public Media{
 		string getRating() const;
 		string getGenre() const;
 		
+		string toString() const;
+		
 	private:
 		string gameRating;
 		string platform;
