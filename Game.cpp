@@ -29,7 +29,7 @@ string Game::getGenre() const{
 
 string Game::toString() const{
 	return "Title: " + name + "\n" +
-			"Cost: " + unitCost + "\n" +
+			"Cost: $" + unitCost + "\n" +
 			"Platform: " + platform + "\n" +
 			"Rating: " + gameRating + "\n" +
 			"Genre: " + genre;

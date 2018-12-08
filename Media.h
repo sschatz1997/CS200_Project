@@ -15,7 +15,7 @@ class Media{
 		string getName() const;
 		string getCost() const;
 		
-		virtual string print() const = 0;
+		virtual string toString() const = 0;
 	
 	protected:
 		string name;

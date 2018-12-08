@@ -5,13 +5,13 @@ using namespace std;
 
 Media::Media(){
 	name = "";
-	unitCost = 0.0;
+	unitCost = "";
 };
 
 void Media::setName(string n){
 	name = n;
 }
-void Media::setCost(float c){
+void Media::setCost(string c){
 	unitCost = c;
 }
 
@@ -19,6 +19,6 @@ string Media::getName() const{
 	return name;
 }
 
-float Media::getCost() const{
+string Media::getCost() const{
 	return unitCost;
 }

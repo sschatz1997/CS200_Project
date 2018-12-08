@@ -33,7 +33,7 @@ string Movie::getGenre() const{
 
 string Movie::toString() const{
 	return "Title: " + name + "\n" +
-			"Cost: " + unitCost + "\n" +
+			"Cost: $" + unitCost + "\n" +
 			"Rating: " + movieRating + "\n" +
 			"Genre: " + genre + "\n" +
 			"Length: " + runLength;
