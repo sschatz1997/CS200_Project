@@ -1,6 +1,6 @@
 [Project]
 FileName=Project CS200.dev
-Name=Group
+Name=Project CS200
 Type=1
 Ver=2
 ObjFiles=
@@ -27,9 +27,9 @@ CommandLine=
 Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
-CompilerSet=5
-CompilerSettings=0000000100000000100000000
-UnitCount=8
+CompilerSet=0
+CompilerSettings=0000000000000000000000000
+UnitCount=7
 
 [VersionInfo]
 Major=1
@@ -50,8 +50,8 @@ ProductVersion=
 AutoIncBuildNr=0
 SyncProduct=1
 
-[Unit1]
-FileName=getGame.cpp
+[Unit2]
+FileName=Game.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -60,8 +60,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit2]
-FileName=getGame.h
+[Unit1]
+FileName=Game.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -81,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=Game.h
+FileName=Media.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -91,7 +91,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=gameGenre.h
+FileName=Media.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=Media.h
+FileName=Movie.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -112,16 +112,6 @@ BuildCmd=
 
 [Unit7]
 FileName=Movie.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit8]
-FileName=movieGenre.h
 CompileCpp=1
 Folder=
 Compile=1

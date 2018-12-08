@@ -1,133 +1,110 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Media.h""
+#include <typeinfo>
+
 #include "Game.h"
 #include "Movie.h"
-#include "gameGenre.h"
-#include "movieGenre.h"
 using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-int menu()
-{
+int gMenu(){
+	system("CLS");
+	
 	int choice;
-	cout<<"\t\tMain Menu For PC Games\n"
-		<<"\t1. Add a game.\n"
-		<<"\t2. View All Games.\n"
-		<<"\t3. Search for a Game.\n"
-		<<"\t4. Exit\n"
+	cout<<"Main Menu For PC Games\n"
+		<<"1. Add a game.\n"
+		<<"2. View All Games.\n"
+		<<"3. Search for a Game.\n"
+		<<"4. Enter another Media.\n"
+		<<"5. Exit\n"
 		<<"Enter your choice: ";
 	cin>>choice;
 	return choice;
 }
 
-int genreMenu()
-{
+int gGenreMenu(){
+	system("CLS");
+	
 	int choice = 0;
-	cout<<"\t\tAdd a Game:\n"
-		<<"\t1. Action\n"
-		<<"\t2. Adventure\n"
-		<<"\t3. Role Playing\n"
-		<<"\t4. FPS\n"
-		<<"\t5. Simulation\n"
-		<<"\t6. Strategy\n"
-		<<"\t7. Sports\n"
-		<<"\t8. EXIT\n"
-		<<"Ony enter one genre at a time exit out to enter another game in that genre\n"
+	cout<<"Add a Game:\n"
+		<<"1. Action\n"
+		<<"2. Adventure\n"
+		<<"3. Role Playing\n"
+		<<"4. FPS\n"
+		<<"5. Simulation\n"
+		<<"6. Strategy\n"
+		<<"7. Sports\n"
+		<<"8. EXIT\n"
 		<<"Choice: ";
 	cin >> choice;
 	return choice;
 }
 
-int addGame(int counter, ChooseGenre* gPTR)
-{
-	int choice;
-	string action, adventure, rp, fps, sims, strats, sport;
-	do
-	{
-		choice = genreMenu();
-		switch(choice){
-			case 1: 
-				cout<<"Enter the Action Game: ";
-				cin>>action;
-				gPTR -> setAction(action);
-			break;
-			case 2:
-				cout<<"Enter the Adventure Game: ";
-				cin>>adventure;
-				gPTR -> setAdventure(adventure);
-			break;
-			case 3:
-				cout<<"Enter the Role-Playing Game: ";
-				cin>>rp;
-				gPTR -> setRP(rp);
-			break;
-			case 4:
-				cout<<"Enter the FPS Game: ";
-				cin>>fps;
-				gPTR -> setFPS(fps);
-			break;
-			case 5:
-				cout<<"Enter the Simulation Game: ";
-				cin>>sims;
-				gPTR -> setSim(sims);
-			break;
-			case 6:
-				cout<<"Enter the Strategy Game: ";
-				cin>>strats;
-				gPTR -> setStrat(strats);
-			break;
-			case 7:
-				cout<<"Enter the Sport Game: ";
-				cin>>sport;
-				gPTR -> setSport(sport);
-			break;
-			case 8: cout<<"EXITING"<<endl;
-			break;
-			default: cout<<"Incorect Choice!"<<endl;
-			break;
-		}
-	}while(choice != 8);
-	gPTR++;
-	return counter;
+int addGame(int index, Media** mPTR){
+	int genreChoice = gGenreMenu();
+	
+	index++;
+	return index;
 }
 
-void viewAllGames(int index, ChooseGenre* gPTR)
-{
-	cout<<"test: "<< gPTR -> getAction()<<endl;
-	for(int i = 0; i<index; i++)
-	{
-		cout << gPTR -> print();
-		gPTR++;
+void viewAllGames(int index, Media** mPTR){
+	for(int i = 0; i < index; i++){
+		cout << mPTR[i] -> print() << "\n";
 	}
 }
 
-int main(int argc, char** argv) 
-{
-	ChooseGenre G[100];
-	int userChoice;
-	int index = 0;
-/*	string test;
-	cout <<"enter action game: ";
-	cin>>test;
-	G.setAction(test); 
-	cout<<"Action game "<<G.getAction();proof of concept */
-	do
-	{	
-		userChoice = menu();
-		switch(userChoice){
-			case 1: index = addGame(index, G);
-			break;
-			case 2:viewAllGames(index, G);
-			break;
-			case 3:
-			break;
-			case 4: cout<<"EXITING"<<endl;
-			break;
-			default: cout<<"Incorect Choice!"<<endl;
-			break;
-		}
+int main(int argc, char** argv) {
+	Media* gameList[100];
+	Media* movieList[100];
+	
+	int mSelection;
+	int userChoice= 0;
+	int mIndex = 0;
+	int gIndex = 0;
+	
+	//mediaList[0]->setName(test); 
+	//cout<<"Action game "<<mediaList[0]->getName();
+	do{	
+		cout<< "Media Type:\n"
+			<< "1. Game\n"
+			<< "2. Movie\n"
+			<< "Choice: ";
+		cin >> mSelection;	 
+		
+		if(mSelection = 1){
+			userChoice = gMenu();
+			switch(userChoice){
+				case 1: gIndex = addGame(gIndex, gameList);
+					break;
+				case 2: viewAllGames(gIndex, gameList);
+					break;
+				case 3:
+					break;
+				case 4:
+					break;	
+				case 5: cout<<"EXITING"<<endl;
+					return 0;
+				default: cout<<"Incorect Choice!"<<endl;
+					break;
+			}
+		}/*else{
+			userChoice = mMenu();
+			switch(userChoice){
+				case 1: mIndex = addMovie(mIndex, movieList);
+					break;
+				case 2: viewAllMovies(mIndex, movieList);
+					break;
+				case 3:
+					break;
+				case 4:
+					break;	
+				case 5: cout<<"EXITING"<<endl;
+					return 0;
+				default: cout<<"Incorect Choice!"<<endl;
+					break;
+			}
+		}*/
 	}while(userChoice != 4);
 	system("PAUSE");
 	return 0;

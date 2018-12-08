@@ -1,20 +1,27 @@
 //Game.h
-#include "Media.h"
 
-class Game : Media{
-	private:
-		string esrbRating;
-		string platform;
+#ifndef GAME_H
+#define GAME_H
+
+#include <string>
+#include "Media.h"
+using namespace std;
+
+class Game : public Media{
 	public:
 		Game();
-		void setRating(string);
 		void setPlatform(string);
+		void setRating(string);
+		void setGenre(string);
+		
+		string getPlatform() const;
+		string getRating() const;
+		string getGenre() const;
+		
+	private:
+		string gameRating;
+		string platform;
+		string genre;
 };
 
-Game::Game(){
-	esrbRating = "";
-	platform = "";
-}
-
-void Game::setRating(string rating){ esrbRating = rating; }
-void Game::setPlatform(string name){ platform = name; }
+#endif

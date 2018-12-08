@@ -3,19 +3,19 @@
 #include "Media.h"
 
 class Movie : Media{
+	public:
+		Movie();
+		
+		void setLength(string);
+		void setRating(string);
+		void setGenre(string);
+		
+		string getLength() const;
+		string getRating() const;
+		string getGenre() const;
+		
 	private:
 		string runLength;
 		string movieRating; 
-	public:
-		Movie();
-		void setLength(string);
-		void setRating(string);
+		string genre;
 };
-
-Movie::Movie(){
-	runLength = "";
-	movieRating = "";
-}
-
-void Movie::setLength(string length){ runLength = length; }
-void Movie::setRating(string rating){ movieRating = rating; }
