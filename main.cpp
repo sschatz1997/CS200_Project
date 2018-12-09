@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <typeinfo>
-
 #include "Game.h"
 #include "Movie.h"
 using namespace std;
@@ -113,7 +112,8 @@ int addGame(int index, Media** gPTR){
 	g.setGenre(genre);
 	
 	gPTR[index] = &g;
-	cout << gPTR[index] -> toString();
+//	cout << gPTR[index] -> toString();
+	gPTR -> print();
 	index++;
 	return index;
 }

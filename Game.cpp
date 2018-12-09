@@ -1,6 +1,9 @@
+#include <iostream>
 #include <string>
+#include <fstream>
+#include <typeinfo>
 #include "Game.h"
-
+using namespace std;
 Game::Game(){
 	gameRating = "";
 	platform = "";
@@ -33,4 +36,8 @@ string Game::toString() const{
 			"Platform: " + platform + "\n" +
 			"Rating: " + gameRating + "\n" +
 			"Genre: " + genre;
+}
+
+string Game::print() {
+	cout << Game::toString();
 }

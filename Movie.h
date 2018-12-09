@@ -14,7 +14,8 @@ class Movie : Media{
 		string getRating() const;
 		string getGenre() const;
 		
-		string toString() const;
+		virtual string toString() const = 0;
+		string print();
 		
 	private:
 		string runLength;

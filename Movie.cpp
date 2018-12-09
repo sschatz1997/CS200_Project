@@ -1,6 +1,6 @@
 #include <iomanip>
 #include <sstream>
-
+#include <string>
 #include "Movie.h"
 
 using namespace std;
@@ -38,4 +38,8 @@ string Movie::toString() const{
 			"Genre: " + genre + "\n" +
 			"Length: " + runLength;
 
+}
+
+string Movie::print() {
+	cout << Game::toString();
 }
