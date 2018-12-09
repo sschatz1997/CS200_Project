@@ -1,6 +1,9 @@
 #include <iomanip>
 #include <sstream>
+#include <iostream>
 #include <string>
+#include <fstream>
+#include <typeinfo>
 #include "Movie.h"
 
 using namespace std;
@@ -41,5 +44,5 @@ string Movie::toString() const{
 }
 
 string Movie::print() {
-	cout << Game::toString();
+	cout << Movie::toString();
 }
