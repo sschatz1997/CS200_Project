@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <typeinfo>
 #include "Movie.h"
 
 using namespace std;
@@ -41,8 +40,4 @@ string Movie::toString() const{
 			"Genre: " + genre + "\n" +
 			"Length: " + runLength;
 
-}
-
-string Movie::print() {
-	cout << Movie::toString();
 }

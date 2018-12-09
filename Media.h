@@ -3,7 +3,6 @@
 #ifndef MEDIA_H
 #define MEDIA_H
 
-
 using namespace std;
 
 class Media{
@@ -16,7 +15,6 @@ class Media{
 		string getCost() const;
 		
 		virtual string toString() const = 0;
-		string print();
 	
 	protected:
 		string name;

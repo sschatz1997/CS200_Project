@@ -2,7 +2,7 @@
 
 #include "Media.h"
 
-class Movie : Media{
+class Movie : public Media{
 	public:
 		Movie();
 		
@@ -14,8 +14,7 @@ class Movie : Media{
 		string getRating() const;
 		string getGenre() const;
 		
-		virtual string toString() const = 0;
-		string print();
+		string toString() const;
 		
 	private:
 		string runLength;

@@ -1,11 +1,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <typeinfo>
 #include "Game.h"
 #include "Movie.h"
 using namespace std;
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int gMenu(){
 	system("CLS");
@@ -92,7 +90,7 @@ int mLengthMenu(){//this is for the length of the movie
 	return choice;
 }
 
-int addGame(int index, Media** gPTR){
+int addGame(int index, Game* gARR){
 	cin.clear();
 	fflush(stdin);
 	system("CLS");
@@ -148,25 +146,23 @@ int addGame(int index, Media** gPTR){
 			break;					
 	}
 	
-	g.setName(name);
-	g.setCost(price);
-	g.setRating(rating);
-	g.setPlatform(platform);
-	g.setGenre(genre);
+	gARR[index].setName(name);
+	gARR[index].setCost(price);
+	gARR[index].setRating(rating);
+	gARR[index].setPlatform(platform);
+	gARR[index].setGenre(genre);
 	
-	gPTR[index] = &g;
-//	cout << gPTR[index] -> toString();
-	g.print();
 	index++;
 	return index;
 }
 
-int addMovie(int index, Media* mPTR)
+int addMovie(int index, Media** mPTR)
 {
 	cin.clear();
 	fflush(stdin);
 	system("CLS");
 	
+	Movie m;
 	string name;
 	string price;
 	string length;
@@ -235,32 +231,38 @@ int addMovie(int index, Media* mPTR)
 		break;
 		case 8: cout << "Invalid Choice\n";
 	}
-	mPTR* -> setName(name);
-	mPTR -> setCost(price);
-	mPTR -> setLength(length);
-	mPTR -> setRating(rating);
-	mPTR -> setGenre(genre);
+	
+	m.setName(name);
+	m.setCost(price);	
+	m.setLength(length);
+	m.setRating(rating);
+	m.setGenre(genre);
+	
+	mPTR[index] = &m;
+	cout << mPTR[index] -> toString();
 	index++;
 	return index;
 	
 }
 
-void viewAllGames(int index, Media** gPTR){
-	for(int i = 0; i < index; i++){
-		cout << gPTR[i]->toString() << "\n";
+void viewAllGames(int index, Media* gList){
+	for(int i = 0; i < index; i++){ 
+		cout << gList[i].toString() << "\n";
 	}
 }
 
 int main() {
-	Media* gameList[100];
-	Media movieList[100];
-	
+	Game* gameList = new Game[100];
+	Movie* movieList = new Movie[100];
 	int mSelection;
 	int userChoice= 0;
-	int mIndex = 0;
 	int gIndex = 0;
+	int mIndex = 0;
 	
-	do{
+	while(true){
+		cin.clear();
+		fflush(stdin);
+		system("cls");
 		cout<< "Media Type:\n"
 			<< "1. Game\n"
 			<< "2. Movie\n"
@@ -274,7 +276,7 @@ int main() {
 						break;
 					case 2: viewAllGames(gIndex, gameList);
 						break;
-					case 3: mIndex = addMovie(mIndex, movieList);
+					case 3: 
 						break;
 					case 4:
 						break;	
@@ -290,7 +292,7 @@ int main() {
 						break;
 					case 2: viewAllMovies(mIndex, movieList);
 						break;
-					case 3:
+					case 3: mIndex = addMovie(mIndex, movieList);
 						break;
 					case 4:
 						break;	
@@ -302,7 +304,7 @@ int main() {
 			}*/
 			system("PAUSE");
 		}while(userChoice != 4);
-	}while(userChoice != 4);
+	}
 	system("PAUSE");
 	return 0;
 }

@@ -37,7 +37,3 @@ string Game::toString() const{
 			"Rating: " + gameRating + "\n" +
 			"Genre: " + genre;
 }
-
-string Game::print() {
-	cout << Game::toString();
-}
