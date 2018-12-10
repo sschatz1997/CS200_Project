@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+# Data Files
+*.txt
+
+# Makefile
+*.win
+
 # Compiled Object files
 *.slo
 *.lo

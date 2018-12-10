@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "Game.h"
 #include "Movie.h"
 using namespace std;
@@ -9,14 +10,14 @@ int gMenu(){
 	system("CLS");
 	
 	int choice;
-	cout<<"Main Menu For PC Games\n"
-		<<"1. Add a game.\n"
+	cout<<"Main Menu For Games\n"
+		<<"1. Add a Game.\n"
 		<<"2. View All Games.\n"
 		<<"3. Search for a Game.\n"
 		<<"4. Enter another Media.\n"
 		<<"5. Exit\n"
 		<<"Enter your choice: ";
-	cin>>choice;
+	cin >>choice;
 	return choice;
 }
 
@@ -44,7 +45,7 @@ int gGenreMenu(){
 		<<"6. Strategy\n"
 		<<"7. Sports\n"
 		<<"Choice: ";
-	cin >> choice;
+	cin >>choice;
 	return choice;
 }
 
@@ -113,6 +114,20 @@ int addGame(int index, Game* gARR){
 	return index;
 }
 
+int mMenu(){
+	system("CLS");
+	
+	int choice;
+	cout<<"Main Menu For Movies\n"
+		<<"1. Add a Movie.\n"
+		<<"2. View All Movies.\n"
+		<<"3. Search for a Movie.\n"
+		<<"4. Enter another Media.\n"
+		<<"5. Exit\n"
+		<<"Enter your choice: ";
+	cin>>choice;
+	return choice;
+}
 
 int mLengthMenu(){//this is for the length of the movie
 	int choice;
@@ -170,10 +185,10 @@ int addMovie(int index, Movie* mARR){
 	
 	cout<<"Movie Menu: \n"
 		<<"Name: ";
-	cin>>name;
+	getline(cin, name);
 	cout <<"Price: ";
 	cin>>price;	
-	cout<<"Length: ";
+	cout<<"Length: \n";
 	int lengthOut = mLengthMenu();
 	switch(lengthOut){
 		case 1: length = "Half Hour";
@@ -242,15 +257,132 @@ int addMovie(int index, Movie* mARR){
 	
 }
 
+void viewMedia(Media &m){
+	cout << m.toString() << "\n";
+}
+
+void searchGame(int index, Game* gARR){
+	cin.clear();
+	fflush(stdin);
+	
+	string name;
+	cout<< "Enter the name of the game: ";
+	getline(cin, name);
+	
+	for(int i = 0; i < index; i++){
+		if(gARR[i].getName() == name)
+			viewMedia(gARR[i]);
+	}
+	system("pause");
+}
+
+void searchMovie(int index, Movie* mARR){
+	cin.clear();
+	fflush(stdin);
+	
+	string name;
+	cout<< "Enter the name of the movie: ";
+	getline(cin, name);
+	
+	for(int i = 0; i < index; i++){
+		if(mARR[i].getName() == name)
+			viewMedia(mARR[i]);
+	}
+	system("pause");
+}
+
+void saveMedia(int gIndex, Game* gARR, int mIndex, Movie* mARR){
+	ofstream gameD("gameData.txt", ios::out | ios::trunc);
+	for(int i = 0; i < gIndex; i++){
+		gameD << gARR[i].getName() << "|"
+			  << gARR[i].getCost() << "|"
+			  << gARR[i].getRating() << "|"
+	          << gARR[i].getPlatform() << "|"
+	          << gARR[i].getGenre() << "\n";
+	}
+	gameD.close();
+	
+	ofstream movieD("movieData.txt", ios::out | ios::trunc);
+	for(int i = 0; i < mIndex; i++){
+		movieD << mARR[i].getName() << "|"
+			   << mARR[i].getCost() << "|"
+			   << mARR[i].getLength() << "|"
+	           << mARR[i].getRating() << "|"
+	           << mARR[i].getGenre() << "\n";
+	}
+	movieD.close();
+}
+
+void loadMedia(int* indexes, Game* gARR, Movie* mARR){
+	string line;
+	int gIndex = 0;
+	int mIndex = 0;
+	string vars[5];
+	
+	ifstream gameD("gameData.txt");
+	if(gameD.is_open()){
+    	while(getline(gameD, line)){
+    		stringstream ss(line);
+    		string word;
+    		int temp = 0;
+    		while(getline(ss, word, '|')){
+    			vars[temp++] = word;
+			}
+			gARR[gIndex].setName(vars[0]);
+			gARR[gIndex].setCost(vars[1]);	
+			gARR[gIndex].setRating(vars[2]);
+			gARR[gIndex].setPlatform(vars[3]);
+			gARR[gIndex].setGenre(vars[4]);
+			gIndex++;
+    	}
+    	gameD.close();
+  	}
+
+	ifstream movieD("movieData.txt");
+	if(movieD.is_open()){
+    	while(getline(movieD, line)){
+    		stringstream ss(line);
+    		string word;
+    		int temp = 0;
+    		while(getline(ss, word, '|')){
+    			vars[temp++] = word;
+			}
+			mARR[mIndex].setName(vars[0]);
+			mARR[mIndex].setCost(vars[1]);
+			mARR[mIndex].setLength(vars[2]);
+	        mARR[mIndex].setRating(vars[3]);
+	        mARR[mIndex].setGenre(vars[4]);
+			mIndex++;
+    	}
+    	movieD.close();
+  	}
+	indexes[0] = gIndex;
+	indexes[1] = mIndex;
+}
+
 int main() {
 	Game* gameList = new Game[100];
 	Movie* movieList = new Movie[100];
+	int indexes[2];
 	int mSelection;
 	int loadOption;
 	int userChoice = 0;
 	int gIndex = 0;
 	int mIndex = 0;
 	
+	if(ifstream("gameData.txt") || ifstream("movieData.txt")){
+		cout<< "Load Previous media? \n"
+			<< "1. Yes\n"
+			<< "2. No\n"
+			<< "Choice: ";
+		cin >> loadOption;
+		if(loadOption == 1){
+			loadMedia(indexes, gameList, movieList);
+			gIndex = indexes[0];
+			mIndex = indexes[1];
+		}
+		system("CLS");
+	}
 	while(true){
 		cin.clear();
 		fflush(stdin);
@@ -261,39 +393,43 @@ int main() {
 			<< "Choice: ";
 		cin >> mSelection;
 		do{		
-			if(mSelection = 1){
+			if(mSelection == 1){
 				userChoice = gMenu();
 				switch(userChoice){
 					case 1: gIndex = addGame(gIndex, gameList);
 						break;
-					case 2: for(int i = 0; i < gIndex; i++){ cout << gameList[i].toString() << "\n"; }
+					case 2: for(int i = 0; i < gIndex; i++){ viewMedia(gameList[i]); }
+							system("PAUSE");
 						break;
-					case 3: 
+					case 3: searchGame(gIndex, gameList);
 						break;
 					case 4:
 						break;	
 					case 5: cout<<"EXITING"<<endl;
+							saveMedia(gIndex, gameList, mIndex ,movieList);
 						return 0;
 					default: cout<<"Incorect Choice!"<<endl;
 						break;
 				}
-			}/*else{
+			}else{
 				userChoice = mMenu();
 				switch(userChoice){
 					case 1: mIndex = addMovie(mIndex, movieList);
 						break;
-					case 2: for(int i = 0; i < mIndex; i++){ cout << movieList[i].toString() << "\n"; }
+					case 2: for(int i = 0; i < mIndex; i++){ viewMedia(movieList[i]); }
+							system("PAUSE");
 						break;
-					case 3: mIndex = addMovie(mIndex, movieList);
+					case 3: searchMovie(mIndex, movieList);
 						break;
 					case 4:
 						break;	
 					case 5: cout<<"EXITING"<<endl;
+							saveMedia(gIndex, gameList, mIndex ,movieList);
 						return 0;
 					default: cout<<"Incorect Choice!"<<endl;
 						break;
 				}
-			}*/
+			}
 		}while(userChoice != 4);
 	}
 	system("PAUSE");
