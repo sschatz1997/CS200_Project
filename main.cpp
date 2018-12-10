@@ -33,18 +33,6 @@ int gRatingMenu(){
 	return choice;
 }
 
-int mRatingMenu()
-{
-	int choice;
-	cout<<"1. G\n"
-		<<"2. PG\n"
-		<<"3. PG-13\n"
-		<<"4. R\n"
-		<<"5. NC-17\n"
-		<<"Choice: ";
-	cin >> choice;
-	return choice;
-}
 
 int gGenreMenu(){
 	int choice;
@@ -59,43 +47,12 @@ int gGenreMenu(){
 	cin >> choice;
 	return choice;
 }
-//genre of the movie
-int mGenreMenu(){
-	int choice;
-	cout<<"1. Action\n"
-		<<"2. Adventure\n"
-		<<"3. Comedy\n"
-		<<"4. Crime\n"
-		<<"5. Drama\n"
-		<<"6. Horror\n"
-		<<"7. Science Fiction\n"
-		<<"8. Western\n"
-		<<"Choice: ";
-	cin >> choice;
-	return choice;
-		
-}
-
-int mLengthMenu(){//this is for the length of the movie
-	int choice;
-	cout<<"1. Half Hour\n"
-		<<"2. Hour\n"
-		<<"3. Hour and a Half\n"
-		<<"4. Two Hours\n"
-		<<"5. Two and Half Hours\n"
-		<<"6. Three Hours\n"
-		<<"7. More then Three Hours\n"
-		<<"Length: ";
-	cin >> choice;
-	return choice;
-}
 
 int addGame(int index, Game* gARR){
 	cin.clear();
 	fflush(stdin);
 	system("CLS");
-	
-	Game g;
+
 	string name;
 	string price;
 	string platform;
@@ -156,13 +113,55 @@ int addGame(int index, Game* gARR){
 	return index;
 }
 
-int addMovie(int index, Media** mPTR)
+
+int mLengthMenu(){//this is for the length of the movie
+	int choice;
+	cout<<"1. Half Hour\n"
+		<<"2. Hour\n"
+		<<"3. Hour and a Half\n"
+		<<"4. Two Hours\n"
+		<<"5. Two and Half Hours\n"
+		<<"6. Three Hours\n"
+		<<"7. More then Three Hours\n"
+		<<"Length: ";
+	cin >> choice;
+	return choice;
+}
+
+int mRatingMenu()
 {
+	int choice;
+	cout<<"1. G\n"
+		<<"2. PG\n"
+		<<"3. PG-13\n"
+		<<"4. R\n"
+		<<"5. NC-17\n"
+		<<"Choice: ";
+	cin >> choice;
+	return choice;
+}
+
+int mGenreMenu(){
+	int choice;
+	cout<<"1. Action\n"
+		<<"2. Adventure\n"
+		<<"3. Comedy\n"
+		<<"4. Crime\n"
+		<<"5. Drama\n"
+		<<"6. Horror\n"
+		<<"7. Science Fiction\n"
+		<<"8. Western\n"
+		<<"Choice: ";
+	cin >> choice;
+	return choice;
+		
+}
+
+int addMovie(int index, Movie* mARR){
 	cin.clear();
 	fflush(stdin);
 	system("CLS");
 	
-	Movie m;
 	string name;
 	string price;
 	string length;
@@ -232,30 +231,23 @@ int addMovie(int index, Media** mPTR)
 		case 8: cout << "Invalid Choice\n";
 	}
 	
-	m.setName(name);
-	m.setCost(price);	
-	m.setLength(length);
-	m.setRating(rating);
-	m.setGenre(genre);
+	mARR[index].setName(name);
+	mARR[index].setCost(price);	
+	mARR[index].setLength(length);
+	mARR[index].setRating(rating);
+	mARR[index].setGenre(genre);
 	
-	mPTR[index] = &m;
-	cout << mPTR[index] -> toString();
 	index++;
 	return index;
 	
-}
-
-void viewAllGames(int index, Media* gList){
-	for(int i = 0; i < index; i++){ 
-		cout << gList[i].toString() << "\n";
-	}
 }
 
 int main() {
 	Game* gameList = new Game[100];
 	Movie* movieList = new Movie[100];
 	int mSelection;
-	int userChoice= 0;
+	int loadOption;
+	int userChoice = 0;
 	int gIndex = 0;
 	int mIndex = 0;
 	
@@ -267,14 +259,14 @@ int main() {
 			<< "1. Game\n"
 			<< "2. Movie\n"
 			<< "Choice: ";
-		cin >> mSelection;	 
+		cin >> mSelection;
 		do{		
 			if(mSelection = 1){
 				userChoice = gMenu();
 				switch(userChoice){
 					case 1: gIndex = addGame(gIndex, gameList);
 						break;
-					case 2: viewAllGames(gIndex, gameList);
+					case 2: for(int i = 0; i < gIndex; i++){ cout << gameList[i].toString() << "\n"; }
 						break;
 					case 3: 
 						break;
@@ -290,7 +282,7 @@ int main() {
 				switch(userChoice){
 					case 1: mIndex = addMovie(mIndex, movieList);
 						break;
-					case 2: viewAllMovies(mIndex, movieList);
+					case 2: for(int i = 0; i < mIndex; i++){ cout << movieList[i].toString() << "\n"; }
 						break;
 					case 3: mIndex = addMovie(mIndex, movieList);
 						break;
@@ -302,7 +294,6 @@ int main() {
 						break;
 				}
 			}*/
-			system("PAUSE");
 		}while(userChoice != 4);
 	}
 	system("PAUSE");
